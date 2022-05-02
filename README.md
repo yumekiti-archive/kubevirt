@@ -55,7 +55,7 @@ export VERSION=$(curl -s https://github.com/kubevirt/containerized-data-importer
 kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-operator.yaml
 kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-cr.yaml
 
-kubectl apply -f examples/ubuntu/data-volume.yaml
+kubectl apply -f kubevirt-demo/examples/ubuntu/data-volume.yaml
 
 PUBKEY=`cat ~/.ssh/id_rsa.pub`
 sed -i "s%ssh-rsa.*%$PUBKEY%" kubevirt-demo/examples/ubuntu/vm.yaml
