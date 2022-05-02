@@ -70,3 +70,22 @@ ssh -i ~/.ssh/id_rsa fedora@192.168.39.74 -p 32495
 ```sh
 kubectl describe
 ```
+
+## quickstart
+```sh
+minikube start
+minikube addons enable kubevirt
+
+kubectl get kubevirt.kubevirt.io/kubevirt -n kubevirt -o=jsonpath="{.status.phase}"
+
+export VERSION=$(curl -s https://github.com/kubevirt/containerized-data-importer/releases/latest | grep -o "v[0-9]\.[0-9]*\.[0-9]*")
+kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-operator.yaml
+kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-cr.yaml
+kubectl create -f pvc_fedora.yml
+
+PUBKEY=`cat ~/.ssh/id_rsa.pub`
+sed -i "s%ssh-rsa.*%$PUBKEY%" vm1_pvc.yml
+kubectl create -f vm1_pvc.yml
+
+virtctl expose vmi vm1 --name=vm1-ssh --port=20222 --target-port=22 --type=NodePort
+```
