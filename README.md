@@ -54,9 +54,12 @@ PUBKEY=`cat ~/.ssh/id_rsa.pub`
 sed -i "s%ssh-rsa.*%$PUBKEY%" vm1_pvc.yml
 kubectl create -f vm1_pvc.yml
 
-minikube ssh
 virtctl console vm1
-ssh fedora@VM_IP
+
+virtctl expose vmi vm1 --name=vm1-ssh --port=20222 --target-port=22 --type=NodePort
+
+minikube ip
+ssh -i ~/.ssh/id_rsa fedora@192.168.39.74 -p 32495
 ```
 
 ## ubuntu
