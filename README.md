@@ -84,6 +84,5 @@ kubectl create -f pvc_fedora.yml
 PUBKEY=`cat ~/.ssh/id_rsa.pub`
 sed -i "s%ssh-rsa.*%$PUBKEY%" vm1_pvc.yml
 kubectl create -f vm1_pvc.yml
-
-virtctl expose vmi vm1 --name=vm1-ssh --port=20222 --target-port=22 --type=NodePort
+kubectl create -f vm1_svc.yml
 ```
