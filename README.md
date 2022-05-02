@@ -16,6 +16,7 @@ https://minikube.sigs.k8s.io/docs/start/
 ## kubevirt
 https://kubevirt.io/
 
+## testvm
 ```sh
 minikube start
 
@@ -32,4 +33,16 @@ echo ${ARCH}
 curl -L -o virtctl https://github.com/kubevirt/kubevirt/releases/download/${VERSION}/virtctl-${VERSION}-${ARCH}
 chmod +x virtctl
 sudo install virtctl /usr/local/bin
+```
+
+## pvc
+https://komeiy.hatenablog.com/entry/2019/08/13/090000
+
+```sh
+PUBKEY=`cat ~/.ssh/id_rsa.pub`
+sed -i "s%ssh-rsa.*%$PUBKEY%" vm1_pvc.yml
+kubectl create -f vm1_pvc.yml
+
+virtctl expose vmi vm1 --name vm1s --type NodePort --port 27017 --target-port 22
+ssh 192.168.122.214 -p 31677 -l root
 ```
