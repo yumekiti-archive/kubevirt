@@ -23,6 +23,8 @@ minikube start
 minikube addons enable kubevirt
 
 kubectl get kubevirt.kubevirt.io/kubevirt -n kubevirt -o=jsonpath="{.status.phase}"
+
+kubectl apply -f vm.yaml
 ```
 
 ## Virtctlインストール
@@ -48,16 +50,10 @@ ssh 192.168.122.214 -p 31677 -l root
 ```
 
 ## ubuntu
-https://livewyer.io/blog/2021/02/23/kubevirt-showcase-a-kubernetes-cluster-within-a-kubernetes-cluster/
-
 ```sh
-export VERSION=$(curl -s https://github.com/kubevirt/containerized-data-importer/releases/latest | grep -o "v[0-9]\.[0-9]*\.[0-9]*")
-kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-operator.yaml
-kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-cr.yaml
+```
 
-kubectl apply -f kubevirt-demo/examples/ubuntu/data-volume.yaml
-
-PUBKEY=`cat ~/.ssh/id_rsa.pub`
-sed -i "s%ssh-rsa.*%$PUBKEY%" kubevirt-demo/examples/ubuntu/vm.yaml
-kubectl apply -f kubevirt-demo/examples/ubuntu/vm.yaml
+## デバックコマンド
+```sh
+kubectl describe
 ```
