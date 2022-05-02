@@ -37,16 +37,26 @@ chmod +x virtctl
 sudo install virtctl /usr/local/bin
 ```
 
-## pvc
-https://komeiy.hatenablog.com/entry/2019/08/13/090000
+## cdi
+```sh
+export VERSION=$(curl -s https://github.com/kubevirt/containerized-data-importer/releases/latest | grep -o "v[0-9]\.[0-9]*\.[0-9]*")
+kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-operator.yaml
+kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/$VERSION/cdi-cr.yaml
 
+kubectl create -f pvc_fedora.yml
+
+kubectl get all -n cdi
+```
+
+## pvc
 ```sh
 PUBKEY=`cat ~/.ssh/id_rsa.pub`
 sed -i "s%ssh-rsa.*%$PUBKEY%" vm1_pvc.yml
 kubectl create -f vm1_pvc.yml
 
-virtctl expose vmi vm1 --name vm1s --type NodePort --port 27017 --target-port 22
-ssh 192.168.122.214 -p 31677 -l root
+minikube ssh
+virtctl console vm1
+ssh fedora@VM_IP
 ```
 
 ## ubuntu
