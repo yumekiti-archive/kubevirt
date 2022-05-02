@@ -1,0 +1,39 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachineInstance
+metadata:
+  name: demo-vmi
+  labels:
+    vmi : demo-vmi
+spec:
+  terminationGracePeriodSeconds: 30
+  domain:
+    resources:
+      requests:
+        memory: 1024M
+    devices:
+      disks:
+      - name: containerdisk
+        disk:
+          bus: virtio
+      - disk:
+          bus: virtio
+        name: cloudinitdisk
+  volumes:
+  - name: containerdisk
+    containerDisk:
+      image: mpetason/ubuntu:20.04
+  - name: cloudinitdisk
+    cloudInitNoCloud:
+      userData: |-
+        #cloud-config
+        password: ubuntu
+        chpasswd: { expire: False }
+        ssh_authorized_keys:
+        - YOUR PUBLIC SSH KEY
+        package_update: true
+        package_upgrade: true
+        packages: 
+        - qemu-guest-agent
+        - apache2
+        runcmd:
+        - [ systemctl, start, qemu-guest-agent ]

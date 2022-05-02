@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vmi-lb
+spec:
+  ports:
+  - port: 22
+    name: ssh
+    protocol: TCP
+    targetPort: 22
+  - port: 80
+    name: http
+    protocol: TCP
+    targetPort: 80
+  selector:
+    vmi : demo-vmi  
+  type: LoadBalancer
