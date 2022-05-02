@@ -51,13 +51,6 @@ ssh 192.168.122.214 -p 31677 -l root
 
 ## ubuntu
 ```sh
-kubectl create -f ubuntu/ubuntu-vmi.yaml
-
-kubectl create -f service-ubuntu-vmi.yaml
-
-ssh ubuntu@IPofLoadBalancer
-
-curl http://IPofLoadBalancer
 ```
 
 ## デバックコマンド
