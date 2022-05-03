@@ -66,10 +66,15 @@ ssh -i ~/.ssh/id_rsa fedora@192.168.39.74 -p 32495
 ```sh
 ```
 
-## デバックコマンド
-```sh
-kubectl describe
-```
+## トラブルシューティング
+- kubectl get
+    - リソースの一覧を表示
+- kubectl describe
+    - 単一リソースに関する詳細情報を表示
+- kubectl logs
+    - 単一Pod上の単一コンテナ内のログを表示
+- kubectl exec
+    - 単一Pod上の単一コンテナ内でコマンドを実行
 
 ## quickstart
 ```sh
