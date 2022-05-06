@@ -62,10 +62,6 @@ minikube ip
 ssh -i ~/.ssh/id_rsa fedora@192.168.39.74 -p 32495
 ```
 
-## ubuntu
-```sh
-```
-
 ## トラブルシューティング
 - kubectl get
     - リソースの一覧を表示
