@@ -1,9 +1,14 @@
 # oVirt
 https://kubevirt.io/2018/Deploying-KubeVirt-on-a-Single-oVirt-VM.html
 
+## root
+```
+sudo -i
+```
+
 ## packages install
 ```sh
-sudo apt install ansible git wget
+apt install ansible git wget
 ```
 
 ## ovirt-guest-agent install
@@ -11,10 +16,10 @@ sudo apt install ansible git wget
 echo 'deb  $REPOURL /' >> /etc/apt/sources.list.d/ovirt-guest-agent.list
 wget $REPOURL/Release.key
 apt-key add - < Release.key  
-sudo apt update
-sudo apt install ovirt-guest-agent
+apt update
+apt install ovirt-guest-agent
 
-sudo systemctl start ovirt-guest-agent
+systemctl start ovirt-guest-agent
 ```
 
 ## oc install
@@ -30,5 +35,7 @@ cp openshift-origin-client-tools-v3.9.0-191fece-linux-64bit/oc /usr/bin
 省略
 
 ```sh
+exit
+
 oc cluster up
 ```
