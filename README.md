@@ -22,8 +22,6 @@ minikube start
 
 minikube addons enable kubevirt
 
-kubectl get kubevirt.kubevirt.io/kubevirt -n kubevirt -o=jsonpath="{.status.phase}"
-
 kubectl apply -f vm.yaml
 ```
 
