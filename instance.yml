@@ -1,0 +1,27 @@
+apiVersion: kubevirt.io/v1alpha3
+kind: VirtualMachineInstanceReplicaSet
+metadata:
+  name: testreplicaset
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      myvmi: myvmi
+  template:
+    metadata:
+      name: test
+      labels:
+        myvmi: myvmi
+    spec:
+      domain:
+        devices:
+          disks:
+          - disk:
+            name: containerdisk
+        resources:
+          requests:
+            memory: 64M
+      volumes:
+      - name: containerdisk
+        containerDisk:
+          image: kubevirt/cirros-registry-disk-demo
