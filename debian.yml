@@ -3,7 +3,7 @@ kind: VirtualMachine
 metadata:
   name: debian
 spec:
-  running: false
+  running: true
   template:
     metadata:
       labels: 
@@ -41,4 +41,8 @@ spec:
               bootcmd:
                 - echo cloud-init=disabled > /etc/cloud/cloud-init.disabled
                 - [ /bin/bash, -c, 'echo -e "demopass\ndemopass" | passwd root' ]
-                - reboot
+                - useradd -m user
+                - [ /bin/bash, -c, 'echo -e "demopass\ndemopass" | passwd user' ]
+              runcmd:
+                - apt -y update
+                - apt -y install ssh
