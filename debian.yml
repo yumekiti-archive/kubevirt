@@ -38,11 +38,15 @@ spec:
           cloudInitNoCloud:
             userData: |-
               #cloud-config
-              bootcmd:
-                - echo cloud-init=disabled > /etc/cloud/cloud-init.disabled
-                - [ /bin/bash, -c, 'echo -e "demopass\ndemopass" | passwd root' ]
-                - useradd -m user
-                - [ /bin/bash, -c, 'echo -e "demopass\ndemopass" | passwd user' ]
+              users:
+                - default
+                - name: user
+                  groups: sudo
+                  shell: /bin/bash
+                  sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+                  ssh_pwauth: False
+                  ssh_authorized_keys:
+                    - ssh-rsa YOUR_SSH_PUB_KEY_HERE
               runcmd:
                 - apt -y update
                 - apt -y install ssh
