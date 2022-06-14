@@ -83,6 +83,7 @@ kubectl create -f vm1_svc.yml
 
 ## docker
 ```sh
+eval $(minikube docker-env)
 make up
 docker build -t localhost:5000/quay.io/kubevirt/cirros-container-disk-demo .
 docker push localhost:5000/quay.io/kubevirt/cirros-container-disk-demo
