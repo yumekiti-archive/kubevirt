@@ -70,8 +70,6 @@ ssh -i ~/.ssh/id_rsa fedora@192.168.39.74 -p 32495
 ## quickstart
 ```sh
 minikube start
-minikube addons enable kubevirt
-eval $(minikube docker-env)
 
 kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/v1.48.1/cdi-operator.yaml
 kubectl create -f https://github.com/kubevirt/containerized-data-importer/releases/download/v1.48.1/cdi-cr.yaml
@@ -81,4 +79,13 @@ PUBKEY=`cat ~/.ssh/id_rsa.pub`
 sed -i "s%ssh-rsa.*%$PUBKEY%" vm1_pvc.yml
 kubectl create -f vm1_pvc.yml
 kubectl create -f vm1_svc.yml
+```
+
+## docker
+```sh
+make up
+docker build -t localhost:5000/quay.io/kubevirt/cirros-container-disk-demo .
+docker push localhost:5000/quay.io/kubevirt/cirros-container-disk-demo
+
+kubectl apply -f docker.yml
 ```
