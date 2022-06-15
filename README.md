@@ -7,6 +7,9 @@ https://ubuntu.com/download/desktop
 https://docs.docker.com/engine/install/ubuntu/#installation-methods
 https://qiita.com/DQNEO/items/da5df074c48b012152ee
 
+# kubectl
+https://kubernetes.io/ja/docs/tasks/tools/install-kubectl/
+
 ## minikubeのインストール
 https://minikube.sigs.k8s.io/docs/start/
 
